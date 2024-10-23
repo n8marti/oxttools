@@ -10,21 +10,11 @@ from palaso.langtags import LangTag
 from pathlib import Path
 
 try:
-    unicode
-except NameError:
-    unicode = str
-    unichr = chr
-try:
     from oxttools.xmltemplate import Templater
 except ImportError:
     sys.path.append(str(Path(__file__).parents[1] / 'lib'))
     # sys.path.append(os.path.join(os.path.dirname(__file__), '..','lib'))
     from oxttools.xmltemplate import Templater
-
-try:
-    unicode
-except Exception:
-    unicode = str
 
 
 def main():
@@ -91,7 +81,7 @@ def main():
         t.process(context=d)
     with codecs.open(args.outfile, "w", encoding="utf-8") as of:
         of.write("<?xml version='1.0'?>\n")
-        of.write(unicode(t))
+        of.write(str(t))
 
 
 if __name__ == '__main__':

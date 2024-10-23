@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = 'oxttools'
+description = 'Utility to make libreoffice language extensions'
+version = '0.2'
+readme = 'README.md'
+dependencies = [
+    'lxml',
+]
+requires-python = ">=3.8"
+maintainers = [
+    {name = 'SIL International', email = 'nate_marti@sil.org'}
+]
+classifiers = [
+    "Environment :: Console",
+    "Programming Language :: Python :: 3.8",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Text Processing :: Linguistic",
+]
+
+[project.scripts]
+makeoxt = "scripts.makeoxt:main"
+# ldml2odt = "scripts.ldml2odt:main"  # uses non-standard 'palaso' library
+xmltemplate = "oxttools.xmltemplate:main"
+
+[project.urls]
+Repository = 'http://github.com/silnrsi/oxttools'
+
+[tool.setuptools.packages.find]
+where = [".", "lib"]

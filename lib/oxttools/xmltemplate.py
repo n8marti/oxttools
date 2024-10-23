@@ -1,20 +1,18 @@
 #!/usr/bin/env python3
 
 import argparse
-import basestring
 import lxml.etree as et
 import codecs
 import copy
 import os
 import re
 import sys
-import unicode
 from lxml.etree import XPathEvalError
 
 tmpl = "{uri://nrsi.sil.org/template/0.1}"
 tmpla = "{uri://nrsi.sil.org/template_attributes/0.1}"
 
-stringtype = str if sys.version_info[0] >= 3 else basestring
+stringtype = str
 
 docs = {}
 
@@ -47,7 +45,7 @@ class IterDict(object):
             self.atstart = False
             return self.asdict()
         for i in range(len(self.indices)):
-            if self.indices[i] + 1 < len(self.values[i]): 
+            if self.indices[i] + 1 < len(self.values[i]):
                 self.indices[i] += 1
                 return self.asdict()
         raise StopIteration
@@ -461,7 +459,7 @@ class Templater(object):
             else:
                 s.add(v)
         return sorted(s)
-        
+
     extensions = {
         (None, 'doc'): fn_doc.__func__,
         (None, 'firstword'): fn_firstword.__func__,
@@ -489,7 +487,7 @@ def asstr(v):
     return v
 
 
-if __name__ == '__main__':
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         'infile',
@@ -539,4 +537,8 @@ if __name__ == '__main__':
         t.process(context=d)
     with codecs.open(args.outfile, "w", encoding="utf-8") as of:
         of.write("<?xml version='1.0'?>\n")
-        of.write(unicode(t))
+        of.write(str(t))
+
+
+if __name__ == '__main__':
+    main()

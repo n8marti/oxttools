@@ -1,7 +1,6 @@
 
 import codecs
 import itertools
-import unichr
 import unicodedata
 
 
@@ -83,4 +82,4 @@ SET UTF-8
 
 
 def decompose(s):
-    return "".join([unichr(int(x, 16)) for x in unicodedata.decomposition(s).split()])  # noqa: E501
+    return "".join([chr(int(x, 16)) for x in unicodedata.decomposition(s).split()])  # noqa: E501

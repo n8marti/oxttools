@@ -16,9 +16,6 @@ from argparse import ArgumentParser
 from zipfile import ZipFile, ZipInfo, ZIP_DEFLATED
 import lxml.etree as et
 
-if sys.version_info[0] >= 3:
-    unicode = str
-
 langres = (
     "af-ZA", "ak-GH", "am-ET", "an-ES", "apt-IN", "arn-CL", "as-IN",
     "ast-ES", "axk-CF", "av-RU", "az-AZ", "ba-RU", "be-BY", "beq-CG", "bg-BG",
@@ -205,11 +202,11 @@ def main():
     t.addfn(None, 'fonts', fn_fonts)
     t.parse(os.path.join(resdir, 'dictxcu.xml'))
     t.process()
-    zipadd(ozip, unicode(t).encode('utf-8'), 'dictionaries.xcu')
+    zipadd(ozip, str(t).encode('utf-8'), 'dictionaries.xcu')
 
     t.parse(os.path.join(resdir, 'oxtdescription.xml'))
     t.process()
-    zipadd(ozip, unicode(t).encode('utf-8'), 'description.xml')
+    zipadd(ozip, str(t).encode('utf-8'), 'description.xml')
 
     license = """LICENSES:
     Spell checker: MIT
@@ -253,7 +250,7 @@ def main():
                 itemcount += 1
                 if args.dicttype != 'ptall' and e.attrib['spelling'] != 'Correct':  # noqa: E501
                     continue
-                hun.addword(unicode(e.attrib['word']))
+                hun.addword(str(e.attrib['word']))
                 wordcount += 1
             if wordcount * 4 < itemcount:
                 # warn if less than 25% of the words are valid
